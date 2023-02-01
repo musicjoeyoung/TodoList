@@ -23,7 +23,6 @@
   line-break: anywhere;
   text-align: left;
   margin: 10px 0 10px 0;
-  border-bottom: 1px dotted black;
 }
 button {
   width: 25px;
@@ -46,4 +45,7 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.inputContainer {
+  display: flex;
 }

@@ -4,14 +4,14 @@ import { ITask } from "./Interfaces";
 import TodoTask from "./Components/TodoTask";
 import todoImg from "./todo.png";
 
-//NOTES - add another option to strikethrough; press enter to add//"motivating to-do list" every time something is check off, a motivating banner pops up
-
+// React func comp type `React.FC`
 const App: React.FC = () => {
-  const [task, setTask] = useState<string>("");
-  const [deadline, setDeadline] = useState<number>(0);
+  const [task, setTask] = useState<string>(""); //type string
+  const [deadline, setDeadline] = useState<number>(0); //type number
+  // state hook with type `ITask[]`-- array of objects with properties `taskName` and `deadline`
   const [todo, setTodo] = useState<ITask[]>([]);
 
-  //store what user writes; monitors values in input fields and store them
+  // event handler for handling changes in input fields--typing is specified with `ChangeEvent<HTMLInputElement>`; return nothing so void
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
       setTask(event.target.value);
@@ -20,24 +20,29 @@ const App: React.FC = () => {
     }
   };
 
-  //add task when add button is clicked
   const addTask = (): void => {
+    //return nothing so void
+    // creates new task object w/properties `taskName` and `deadline`
     const newTask = {
       taskName: task,
       deadline: deadline,
     };
+    // adds new task object to the `todo` state and resets input fields
     setTodo([...todo, newTask]);
     setTask("");
     setDeadline(0);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    //type React.KeyboardEvent<HTMLInputElement
     if (event.key === "Enter") {
       addTask();
     }
   };
 
+  // event handler for completing a task; takes in a `taskNameToDelete` string type; returns nothing so voide
   const completeTask = (taskNameToDelete: string): void => {
+    // filters out the task with the specified name and updates the `todo` state
     setTodo(
       todo.filter((task) => {
         return task.taskName !== taskNameToDelete;
