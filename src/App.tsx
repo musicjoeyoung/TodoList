@@ -2,6 +2,9 @@ import React, { useState, ChangeEvent } from "react";
 import "./App.css";
 import { ITask } from "./Interfaces";
 import TodoTask from "./Components/TodoTask";
+import todoImg from "./todo.png";
+
+//NOTES - add another option to strikethrough; press enter to add//"motivating to-do list" every time something is check off, a motivating banner pops up
 
 const App: React.FC = () => {
   const [task, setTask] = useState<string>("");
@@ -28,6 +31,12 @@ const App: React.FC = () => {
     setDeadline(0);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      addTask();
+    }
+  };
+
   const completeTask = (taskNameToDelete: string): void => {
     setTodo(
       todo.filter((task) => {
@@ -39,22 +48,29 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <div className="header">
-        <div className="inputContainer">
-          <input
-            type="text"
-            name="task"
-            placeholder="Add a task:"
-            value={task}
-            onChange={handleChange}
-          />
-          <input
+        <div className="banner">
+          <img src={todoImg} alt="to do banner" />
+        </div>
+        <div className="entry">
+          <h1>To-Do List</h1>
+          <div className="inputContainer">
+            <input
+              type="text"
+              name="task"
+              placeholder="Add a task:"
+              value={task}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            {/*     <input
             type="number"
             name="deadline"
             placeholder="Set a deadline (in days)"
             value={deadline}
             onChange={handleChange}
-          />
-          <button onClick={addTask}>Add</button>
+          /> */}
+            <button onClick={addTask}>Add</button>
+          </div>
         </div>
       </div>
       <div className="todoList">
