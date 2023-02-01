@@ -9,8 +9,8 @@ const TodoTask = ({ task, completeTask }: Props) => {
   return (
     <div className="task">
       <div className="content">
-        <span></span>
-        <span></span>
+        <span>{task.taskName}</span>
+        <span>{task.taskName}</span>
       </div>
       <button
         onClick={() => {

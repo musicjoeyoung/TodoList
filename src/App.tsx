@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import "./App.css";
 import { ITask } from "./Interfaces";
+import TodoTask from "./Components/TodoTask";
 
 const App: React.FC = () => {
   const [task, setTask] = useState<string>("");
@@ -8,7 +9,7 @@ const App: React.FC = () => {
   const [todo, setTodo] = useState<ITask[]>([]);
 
   //store what user writes; monitors values in input fields and store them
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
       setTask(event.target.value);
     } else {
@@ -25,6 +26,14 @@ const App: React.FC = () => {
     setTodo([...todo, newTask]);
     setTask("");
     setDeadline(0);
+  };
+
+  const completeTask = (taskNameToDelete: string): void => {
+    setTodo(
+      todo.filter((task) => {
+        return task.taskName !== taskNameToDelete;
+      })
+    );
   };
 
   return (
@@ -48,7 +57,11 @@ const App: React.FC = () => {
           <button onClick={addTask}>Add</button>
         </div>
       </div>
-      <div className="todoList"></div>
+      <div className="todoList">
+        {todo.map((task: ITask, key: number) => {
+          return <TodoTask key={key} task={task} completeTask={completeTask} />;
+        })}
+      </div>
     </div>
   );
 };
