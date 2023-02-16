@@ -22,7 +22,7 @@ const TodoTask = ({ task, completeTask }: Props) => {
       <div className="inputContainer">
         <input
           type="checkbox"
-          onClick={handleCheckboxClick}
+          onChange={handleCheckboxClick}
           checked={isChecked}
         />
         <div className="content">

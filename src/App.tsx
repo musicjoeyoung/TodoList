@@ -7,7 +7,6 @@ import todoImg from "./todo.png";
 // React func comp type `React.FC`
 const App: React.FC = () => {
   const [task, setTask] = useState<string>(""); //type string
-  const [deadline, setDeadline] = useState<number>(0); //type number
   // state hook with type `ITask[]`-- array of objects with properties `taskName` and `deadline`
   const [todo, setTodo] = useState<ITask[]>([]);
 
@@ -15,8 +14,6 @@ const App: React.FC = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
       setTask(event.target.value);
-    } else {
-      setDeadline(Number(event.target.value));
     }
   };
 
@@ -25,12 +22,10 @@ const App: React.FC = () => {
     // creates new task object w/properties `taskName` and `deadline`
     const newTask = {
       taskName: task,
-      deadline: deadline,
     };
     // adds new task object to the `todo` state and resets input fields
     setTodo([...todo, newTask]);
     setTask("");
-    setDeadline(0);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -67,13 +62,6 @@ const App: React.FC = () => {
               onChange={handleChange}
               onKeyDown={handleKeyDown}
             />
-            {/*     <input
-            type="number"
-            name="deadline"
-            placeholder="Set a deadline (in days)"
-            value={deadline}
-            onChange={handleChange}
-          /> */}
             <button onClick={addTask}>Add</button>
           </div>
         </div>
