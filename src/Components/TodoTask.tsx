@@ -12,6 +12,7 @@ interface Props {
 
 const TodoTask = ({ task, completeTask }: Props) => {
   const [isChecked, setIsChecked] = useState(false);
+  //const [checkCount, setCheckCount] = useState<number>(0);
 
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);

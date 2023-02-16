@@ -7,6 +7,7 @@ import todoImg from "./todo.png";
 // React func comp type `React.FC`
 const App: React.FC = () => {
   const [task, setTask] = useState<string>(""); //type string
+
   // state hook with type `ITask[]`-- array of objects with properties `taskName` and `deadline`
   const [todo, setTodo] = useState<ITask[]>([]);
 
