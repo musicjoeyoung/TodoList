@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 const App: React.FC = () => {
   const [task, setTask] = useState<string>(""); //type string
 
-  // state hook with type `ITask[]`-- array of objects with properties `taskName` and `deadline`
+  // state hook with type `ITask[]`-- array of objects with properties `taskName` and `id`
   const [todo, setTodo] = useState<ITask[]>([]);
 
   // event handler for handling changes in input fields--typing is specified with `ChangeEvent<HTMLInputElement>`; return nothing so void
