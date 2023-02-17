@@ -12,6 +12,8 @@ const App: React.FC = () => {
   // state hook with type `ITask[]`-- array of objects with properties `taskName` and `id`
   const [todo, setTodo] = useState<ITask[]>([]);
 
+  const [taskCount, setTaskCount] = useState<number>(0);
+
   // event handler for handling changes in input fields--typing is specified with `ChangeEvent<HTMLInputElement>`; return nothing so void
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
@@ -30,6 +32,11 @@ const App: React.FC = () => {
     // adds new task object to the `todo` state and resets input fields
     setTodo([...todo, newTask]);
     setTask("");
+    setTaskCount(taskCount + 1);
+    console.log("taskCount", taskCount);
+    /*  if (taskCount === 10) {
+      alert("10 tasks: you can do this!");
+    } */
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

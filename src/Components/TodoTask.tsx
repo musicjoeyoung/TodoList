@@ -16,7 +16,9 @@ const TodoTask = ({ task, completeTask }: Props) => {
 
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
+    //setCheckCount(checkCount + 1);
   };
+  //console.log("checkCount", checkCount);
 
   return (
     <div className="task">
