@@ -3,6 +3,7 @@ import "./App.css";
 import { ITask } from "./Interfaces";
 import TodoTask from "./Components/TodoTask";
 import todoImg from "./todo.png";
+import { v4 as uuidv4 } from "uuid";
 
 // React func comp type `React.FC`
 const App: React.FC = () => {
@@ -22,8 +23,10 @@ const App: React.FC = () => {
     //return nothing so void
     // creates new task object w/properties `taskName` and `deadline`
     const newTask = {
+      id: uuidv4(),
       taskName: task,
     };
+    //console.log(newTask.id);
     // adds new task object to the `todo` state and resets input fields
     setTodo([...todo, newTask]);
     setTask("");
@@ -41,7 +44,9 @@ const App: React.FC = () => {
     // filters out the task with the specified name and updates the `todo` state
     setTodo(
       todo.filter((task) => {
-        return task.taskName !== taskNameToDelete;
+        return task.id !== taskNameToDelete;
+        //changed this from task.taskName to task.id so that tasks are deleted by unique id (uuid)
+        //before, when deleting based on taskName, if multiples tasks had the same text, ALL of them would be deleted when one was deleted
       })
     );
   };
@@ -68,8 +73,14 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="todoList">
-        {todo.map((task: ITask, key: number) => {
-          return <TodoTask key={key} task={task} completeTask={completeTask} />;
+        {todo.map((task: ITask) => {
+          return (
+            <TodoTask
+              key={task.id}
+              task={task}
+              completeTask={() => completeTask(task.id)} //(see delete function above--was just completeTask=completeTask before)
+            />
+          );
         })}
       </div>
     </div>
