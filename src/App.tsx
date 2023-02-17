@@ -12,7 +12,7 @@ const App: React.FC = () => {
   // state hook with type `ITask[]`-- array of objects with properties `taskName` and `id`
   const [todo, setTodo] = useState<ITask[]>([]);
 
-  const [taskCount, setTaskCount] = useState<number>(0);
+  const [taskCount, setTaskCount] = useState<number>(1);
 
   // event handler for handling changes in input fields--typing is specified with `ChangeEvent<HTMLInputElement>`; return nothing so void
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -51,12 +51,14 @@ const App: React.FC = () => {
     // filters out the task with the specified name and updates the `todo` state
     setTodo(
       todo.filter((task) => {
+        setTaskCount(taskCount - 1);
+        console.log("taskCount", taskCount - 2);
         return task.id !== taskNameToDelete;
-        //changed this from task.taskName to task.id so that tasks are deleted by unique id (uuid)
-        //before, when deleting based on taskName, if multiples tasks had the same text, ALL of them would be deleted when one was deleted
       })
     );
   };
+  //changed this from task.taskName to task.id so that tasks are deleted by unique id (uuid)
+  //before, when deleting based on taskName, if multiples tasks had the same text, ALL of them would be deleted when one was deleted
 
   return (
     <div className="App">
